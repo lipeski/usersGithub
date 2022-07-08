@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     usersResults: {},
-    loadding: false,
+    loading: false,
+    page: 1,
+    error: false
   },
   getters: {
   },
@@ -17,18 +19,27 @@ export default new Vuex.Store({
     },
     setLoading(state, payload) {
       state.loading = payload
+    },
+    setErro(state, payload) {
+      state.error = payload
+    },
+    setSearch(state, payload) {
+      state.search = payload
     }
   },
   actions: {
     getUsersSearch({ commit },params) {
+      commit('setLoading', true)
+      commit('setUsersResults', {})
       axios.get(`https://api.github.com/search/users?q=${params.q}&per_page=20&page=${params.page}`)
         .then(response => {
           commit('setUsersResults', response.data)
           commit('setLoading', false)
-          console.log(response.data.items);
+          commit('setSearch', params.q)
         })
         .catch(error => {
           commit('setLoading', false)
+          commit('setErro', true)
           console.log(error);
         });
     }
