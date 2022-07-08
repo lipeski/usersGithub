@@ -5,7 +5,7 @@
                 <v-avatar>
                     <img
                         :src="user.avatar_url"
-                        alt="John"
+                        alt="imagem do usuario"
                     >
                 </v-avatar>
             </v-col>

@@ -31,8 +31,7 @@ export default {
         searchUsers() {
             let params = {
                 q: this.search,
-                per_page: 20,
-                page: 1
+                page: 1,
             }
             this.$store.dispatch('getUsersSearch', params).then(() => {
                 this.loading = false;
